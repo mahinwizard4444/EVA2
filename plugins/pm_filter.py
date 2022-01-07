@@ -925,7 +925,7 @@ async def auto_filter(client, msg, spoll=False):
     imdb = await get_poster(search, file=(files[0]).file_name) if IMDB else None
     query_by = f"<b>ɴᴏ ᴏғ ғɪʟᴇs :</b> <code><b><i>{total_results}</i></b></code>\n" \
                f"<b>ʏᴏᴜʀ ϙᴜᴇʀʏ :</b> <code><b><i>{search}</i></b></code>\n" \
-               f"<b>ʀᴇϙᴜᴇsᴛᴇᴅ ʙʏ :</b> <spoiler><b><code>{msg.from_user.first_name}</code></b></spoiler>"  # \
+               f"<b>ʀᴇϙᴜᴇsᴛᴇᴅ ʙʏ :</b> <b><code><spoiler>{msg.from_user.first_name}</spoiler></code></b>"  # \
     # f"<b>Aᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ Dᴇʟᴇᴛᴇ Tʜɪs Rᴇϙᴜᴇsᴛ Aғᴛᴇʀ 2 Mɪɴᴜᴛᴇs</b>"
     if imdb:
         cap = IMDB_TEMPLATE.format(
