@@ -55,7 +55,6 @@ async def answer(bot, query):
                 title=file.file_name,
                 file_id=file.file_id,
                 caption=f_caption,
-                thumb_url="https://telegra.ph/file/b62f9703cf805da50d5c4.jpg",
                 description=f'Size: {get_size(file.file_size)}\nType: {file.file_type}',
                 reply_markup=reply_markup))
 
