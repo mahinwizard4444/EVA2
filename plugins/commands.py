@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 import time
@@ -19,9 +20,10 @@ from utils import get_size, is_subscribed, temp
 import re
 
 logger = logging.getLogger(__name__)
+BATCH_FILES = {}
 
 
-@Client.on_message(filters.command("start"))
+@Client.on_message(filters.command("start") & filters.incoming & ~filters.edited)
 async def start(client, message):
     if message.chat.type in ['group', 'supergroup']:
         if message.from_user.id in ADMINS:
@@ -114,42 +116,98 @@ async def start(client, message):
         return
 
     file_id = message.command[1]
-    unique_id, f_id, file_ref, caption = await get_batch(file_id)
+    # unique_id, f_id, file_ref, caption = await get_batch(file_id)
 
-    if unique_id:
-        temp_msg = await message.reply("Please wait...")
-        file_args = f_id.split("#")
-        cap_args = caption.split("#")
-        i = 0
-        await asyncio.sleep(2)
-        await temp_msg.delete()
-        for b_file in file_args:
-            f_caption = cap_args[i]
-            if f_caption is None:
-                f_caption = ""
-            f_caption = f_caption + f"\n\n<code>┈•••✿</code> @UniversalFilmStudio <code>✿•••┈</code>"
-            i += 1
+    files_ = await get_file_details(file_id)
+    if not files_:
+        sts = await message.reply("`⏳ Please Wait...`", parse_mode='markdown')
+        msgs = BATCH_FILES.get(file_id)
+        if not msgs:
+            file = await client.download_media(file_id)
             try:
-                await client.send_cached_media(
-                    chat_id=message.from_user.id,
-                    file_id=b_file,
-                    caption=f_caption,
-                    parse_mode="html",
-                    reply_markup=InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton(
-                                    '🎭 ⭕️ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
-                                )
-                            ]
-                        ]
-                    )
-                )
-            except Exception as err:
-                return await message.reply(f"{str(err)}")
-            await asyncio.sleep(1)
+                with open(file) as file_data:
+                    msgs = json.loads(file_data.read())
+            except:
+                await sts.edit("FAILED")
+                return await client.send_message(LOG_CHANNEL, "UNABLE TO OPEN FILE.")
+            os.remove(file)
+            BATCH_FILES[file_id] = msgs
+        await asyncio.sleep(1)
+        await sts.delete()
+        for msg in msgs:
+            title = msg.get("title")
+            size = get_size(int(msg.get("size", 0)))
+            f_caption = msg.get("caption", "")
+            file_type = msg.get("file_type")
+            entities = msg.get("entities")
 
+            if f_caption is None:
+                f_caption = f"{title}"
+            # f_caption = f_caption + f"\n\n<code>┈•••✿ @UniversalFilmStudio ✿•••┈\n\n💾 Size: {size}</code>"
+            try:
+                if file_type not in ["video", 'audio', 'document']:
+                    await client.send_cached_media(
+                        chat_id=message.from_user.id,
+                        file_id=msg.get("file_id"),
+                        caption=f_caption,
+                        caption_entities=entities,
+                    )
+                else:
+                    await client.send_cached_media(
+                        chat_id=message.from_user.id,
+                        file_id=msg.get("file_id"),
+                        caption=f_caption + f"\n\n<code>┈•••✿ @UniversalFilmStudio ✿•••┈\n\n💾 Size: {size}</code>",
+                        parse_mode="html",
+                        reply_markup=InlineKeyboardMarkup(
+                            [
+                                [
+                                    InlineKeyboardButton(
+                                        '🎭 ⭕️ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
+                                    )
+                                ]
+                            ]
+                        )
+                    )
+            except Exception as err:
+                await sts.edit("FAILED")
+                return await client.send_message(LOG_CHANNEL, f"{str(err)}")
+            await asyncio.sleep(0.5)
         return await message.reply(f"<b><a href='https://t.me/UniversalFilmStudio'>Thank For Using Me...</a></b>")
+
+    # if unique_id:
+    #     temp_msg = await message.reply("Please wait...")
+    #     file_args = f_id.split("#")
+    #     cap_args = caption.split("#")
+    #     i = 0
+    #     await asyncio.sleep(2)
+    #     await temp_msg.delete()
+    #     for b_file in file_args:
+    #         f_caption = cap_args[i]
+    #         if f_caption is None:
+    #             f_caption = ""
+    #         f_caption = f_caption + f"\n\n<code>┈•••✿</code> @UniversalFilmStudio <code>✿•••┈</code>"
+    #         i += 1
+    #         try:
+    #             await client.send_cached_media(
+    #                 chat_id=message.from_user.id,
+    #                 file_id=b_file,
+    #                 caption=f_caption,
+    #                 parse_mode="html",
+    #                 reply_markup=InlineKeyboardMarkup(
+    #                     [
+    #                         [
+    #                             InlineKeyboardButton(
+    #                                 '🎭 ⭕️ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
+    #                             )
+    #                         ]
+    #                     ]
+    #                 )
+    #             )
+    #         except Exception as err:
+    #             return await message.reply(f"{str(err)}")
+    #         await asyncio.sleep(1)
+    #
+    #     return await message.reply(f"<b><a href='https://t.me/UniversalFilmStudio'>Thank For Using Me...</a></b>")
 
     files_ = await get_file_details(file_id)
     if not files_:
