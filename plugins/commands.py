@@ -9,6 +9,7 @@ import asyncio
 from bot import Bot
 from Script import script
 from pyrogram import Client, filters
+from pyrogram.raw.functions import messages as rmsg
 from database.batch_db import get_batch
 from pyrogram.errors.exceptions.bad_request_400 import ChatAdminRequired
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
@@ -308,7 +309,7 @@ async def log_file(bot, message):
         await message.reply(str(e))
 
 
-@Client.on_message(filters.command('delete') & filters.user(ADMINS) & filters.channel)
+@Client.on_message(filters.command('delete') & filters.user(ADMINS))
 async def delete(bot, message):
     """Delete file from database"""
     reply = message.reply_to_message
