@@ -212,7 +212,7 @@ async def deletefilter(client, message):
         return
 
     st = await client.get_chat_member(grp_id, userid)
-    if str(userid) not in ADMINS:
+    if userid not in ADMINS:
         await message.reply_text("You Can't Delete Any Filters From Me. "
                                  "If You Need, Request To **My Owner 👇🏻**.",
                                  reply_markup=InlineKeyboardMarkup(
