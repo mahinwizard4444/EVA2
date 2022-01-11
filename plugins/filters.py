@@ -10,7 +10,7 @@ from database.filters_mdb import (
 
 from database.connections_mdb import active_connection
 from utils import get_file_id, parser, split_quotes
-from info import ADMINS
+from info import ADMINS, LOG_CHANNEL
 
 
 @Client.on_message(filters.command(['filter', 'add']) & filters.incoming)
@@ -48,6 +48,7 @@ async def addfilter(client, message):
             and st.status != "creator"
             and str(userid) not in ADMINS
     ):
+        await message.reply_text("You Don't Have Permission To Create This Filter.", quote=True)
         return
 
     if len(args) < 2:
@@ -109,11 +110,14 @@ async def addfilter(client, message):
 
     await add_filter(grp_id, text, reply_text, btn, fileid, alert)
 
-    await message.reply_text(
-        f"Filter for  `{text}`  added in  **{title}**",
+    filter = await message.reply_text(
+        f"Filter For  `{text}`  Added In  **Globally** By {message.from_user.mention}"
+        "\n\nNote:- If You Add Any Theater Print On Manual Filter, "
+        "Moderators Will Review And Delete The Filter",  # {title}
         quote=True,
         parse_mode="md"
     )
+    await filter.copy(LOG_CHANNEL)
 
 
 @Client.on_message(filters.command(['viewfilters', 'filters']) & filters.incoming)
@@ -155,7 +159,7 @@ async def get_all(client, message):
     texts = await get_filters(grp_id)
     count = await count_filters(grp_id)
     if count:
-        filterlist = f"Total number of filters in **{title}** : {count}\n\n"
+        filterlist = f"Total Number Of Filters : **{count}**\n\n"  # {title}
 
         for text in texts:
             keywords = " ×  `{}`\n".format(text)
@@ -171,7 +175,7 @@ async def get_all(client, message):
                 )
             return
     else:
-        filterlist = f"There are no active filters in **{title}**"
+        filterlist = f"There Are No Active Filters"
 
     await message.reply_text(
         text=filterlist,
@@ -208,11 +212,20 @@ async def deletefilter(client, message):
         return
 
     st = await client.get_chat_member(grp_id, userid)
-    if (
-            st.status != "administrator"
-            and st.status != "creator"
-            and str(userid) not in ADMINS
-    ):
+    if str(userid) not in ADMINS:
+        await message.reply_text("You Can't Delete Any Filters From Me. "
+                                 "If You Need, Request To **My Owner 👇🏻**.",
+                                 reply_markup=InlineKeyboardMarkup(
+                                     [
+                                         [
+                                             InlineKeyboardButton(
+                                                 '⭕️ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
+                                             )
+                                         ]
+                                     ]
+                                 ),
+                                 parse_mode="md",
+                                 quote=True)
         return
 
     try:
@@ -260,7 +273,7 @@ async def delallconfirm(client, message):
         return
 
     st = await client.get_chat_member(grp_id, userid)
-    if (st.status == "creator") or (str(userid) in ADMINS):
+    if str(userid) in ADMINS:
         await message.reply_text(
             f"This will delete all filters from '{title}'.\nDo you want to continue??",
             reply_markup=InlineKeyboardMarkup([
@@ -269,6 +282,9 @@ async def delallconfirm(client, message):
             ]),
             quote=True
         )
+    else:
+        await message.reply_text("You Don't Have Permission To Do This 😡.", quote=True)
+        return
 
 
 __help__ = """
