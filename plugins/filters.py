@@ -111,7 +111,7 @@ async def addfilter(client, message):
     await add_filter(grp_id, text, reply_text, btn, fileid, alert)
 
     filter = await message.reply_text(
-        f"Filter For  `{text}`  Added In  **Globally** By {message.from_user.mention}"
+        f"Filter For  `{text}`  Added In  **Globally** By [{message.from_user.first_name}](tg://user?id={message.from_user.id})"
         "\n\nNote:- If You Add Any Theater Print On Manual Filter, "
         "Moderators Will Review And Delete The Filter",  # {title}
         quote=True,
@@ -159,10 +159,10 @@ async def get_all(client, message):
     texts = await get_filters(grp_id)
     count = await count_filters(grp_id)
     if count:
-        filterlist = f"Total Number Of Filters : **{count}**\n\n"  # {title}
+        filterlist = f"**Total Number Of Filters : **`{count}`\n\n"  # {title}
 
         for text in texts:
-            keywords = " ×  `{}`\n".format(text)
+            keywords = " ➲  `{}`\n".format(text)
 
             filterlist += keywords
 
