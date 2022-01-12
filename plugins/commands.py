@@ -327,6 +327,7 @@ async def delete(bot, message):
         await msg.edit('This Is Not Supported File Format')
         await asyncio.sleep(2)
         await msg.delete()
+        await message.delete()
         return
 
     file_id, file_ref = unpack_new_file_id(media.file_id)
@@ -339,6 +340,7 @@ async def delete(bot, message):
         await asyncio.sleep(2)
         await msg.delete()
         await reply.delete()
+        await message.delete()
     else:
         file_name = re.sub(r"(_|\-|\.|\+)", " ", str(media.file_name))
         result = await Media.collection.delete_one({
@@ -351,6 +353,7 @@ async def delete(bot, message):
             await asyncio.sleep(2)
             await msg.delete()
             await reply.delete()
+            await message.delete()
         else:
             # files indexed before https://github.com/EvamariaTG/EvaMaria/commit/f3d2a1bcb155faf44178e5d7a685a1b533e714bf#diff-86b613edf1748372103e94cacff3b578b36b698ef9c16817bb98fe9ef22fb669R39 
             # have original file name.
@@ -364,10 +367,12 @@ async def delete(bot, message):
                 await asyncio.sleep(2)
                 await msg.delete()
                 await reply.delete()
+                await message.delete()
             else:
                 await msg.edit('File Not Found In Database')
                 await asyncio.sleep(2)
                 await msg.delete()
+                await message.delete()
 
 
 @Client.on_message(filters.command('deleteall') & filters.user(ADMINS))
