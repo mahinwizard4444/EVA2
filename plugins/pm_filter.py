@@ -31,7 +31,21 @@ SPELL_CHECK = {}
 @Client.on_message(filters.group & filters.text & ~filters.edited & filters.incoming)
 async def give_filter(client, message):
     group_id = message.chat.id
+    chat_type = message.sender_chat.type if message.sender_chat else None
     name = message.text
+
+    if chat_type in ["channel"]:
+        text = f"""
+#DETECT_SENDER_AS_CHANNEL
+
+**CHANNEL: {message.sender_chat.title} ({message.sender_chat.id})** 
+`CHAT: {message.chat.title} ({message.chat.id})`
+**MESSAGE: You Cannot Request Via Channel**"""
+        chat_channel = await message.reply_text(text, parse_mode="md", quote=True)
+        await asyncio.sleep(2)
+        await chat_channel.delete()
+        await message.delete()
+        return
 
     keywords = await get_filters(group_id)
     for keyword in reversed(sorted(keywords, key=len)):
