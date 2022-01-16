@@ -441,6 +441,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     file_id=file_id,
                     caption=f_caption,
                     parse_mode="html",
+                    protect_content=True,
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
@@ -485,6 +486,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             file_id=file_id,
             caption=f_caption,
             parse_mode="html",
+            protect_content=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [

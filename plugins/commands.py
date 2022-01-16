@@ -151,6 +151,7 @@ async def start(client, message):
                         chat_id=message.from_user.id,
                         file_id=msg.get("file_id"),
                         caption=f_caption,
+                        protect_content=True,
                         caption_entities=entities,
                     )
                 else:
@@ -159,6 +160,7 @@ async def start(client, message):
                         file_id=msg.get("file_id"),
                         caption=f_caption + f"\n\n<code>┈•••✿ @UniversalFilmStudio ✿•••┈\n\n💾 Size: {size}</code>",
                         parse_mode="html",
+                        protect_content=True,
                         reply_markup=InlineKeyboardMarkup(
                             [
                                 [
@@ -231,6 +233,7 @@ async def start(client, message):
         file_id=file_id,
         caption=f_caption,
         parse_mode="html",
+        protect_content=True,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
