@@ -308,10 +308,6 @@ async def gen_link_batch(bot, message):
                                        caption="⚠️Generated For File Store.")
         os.remove(f"batchmode_{message.from_user.id}.json")
         file_id, ref = unpack_new_file_id(post.document.file_id)
-    except Exception as e:
-        logger.exception(e)
-        await second_message.edit(f'Error: {e}')
-    else:
         link = f"https://t.me/{temp.U_NAME}?start={file_id}"
         reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🔁 Share URL",
                                                                    url=f'https://telegram.me/share/url?url={link}')]])
@@ -319,6 +315,9 @@ async def gen_link_batch(bot, message):
         await second_message.delete()
         await first_message.delete()
         await message.delete()
+    except Exception as e:
+        logger.exception(e)
+        await second_message.edit(f'Error: {e}')
 
 
 # import base64
