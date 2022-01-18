@@ -311,7 +311,7 @@ async def gen_link_batch(bot, message):
         link = f"https://t.me/{temp.U_NAME}?start={file_id}"
         reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🔁 Share URL",
                                                                    url=f'https://telegram.me/share/url?url={link}')]])
-        await sts.edit(f"<b>Here is your link</b>\n\n{link}", quote=True, reply_markup=reply_markup)
+        await sts.edit(f"<b>Here is your link</b>\n\n{link}", reply_markup=reply_markup)
         await second_message.delete()
         await first_message.delete()
         await message.delete()
