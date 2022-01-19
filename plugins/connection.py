@@ -2,6 +2,7 @@ from pyrogram import filters, Client
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 from Script import script
+from database.settings_db import sett_db
 from database.connections_mdb import add_connection, all_connections, if_active, delete_connection
 from info import ADMINS
 import logging
@@ -73,6 +74,8 @@ async def addconnection(client, message):
                     "You're already connected to this chat!",
                     quote=True
                 )
+            if not await sett_db.is_settings_exist(str(group_id)):
+                await sett_db.add_settings(str(group_id), True)
         else:
             await message.reply_text("Add me as an admin in group", quote=True)
     except Exception as e:

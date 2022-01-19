@@ -17,6 +17,8 @@ from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
 from info import CHANNELS, ADMINS, AUTH_CHANNEL, CUSTOM_FILE_CAPTION, LOG_CHANNEL, PICS, HELPABLE
 from plugins.misc import paginate_modules
+from database.settings_db import sett_db
+from database.connections_mdb import active_connection
 from utils import get_size, is_subscribed, temp
 import re
 
@@ -119,6 +121,8 @@ async def start(client, message):
     file_id = message.command[1]
     # unique_id, f_id, file_ref, caption = await get_batch(file_id)
 
+    grpid = await active_connection(str(message.from_user.id))
+    settings = await sett_db.get_settings(str(grpid))
     files_ = await get_file_details(file_id)
     if not files_:
         sts = await message.reply("`⏳ Please Wait...`", parse_mode='markdown')
@@ -151,7 +155,7 @@ async def start(client, message):
                         chat_id=message.from_user.id,
                         file_id=msg.get("file_id"),
                         caption=f_caption,
-                        protect_content=False,
+                        protect_content=settings["file_secure"],
                         caption_entities=entities,
                     )
                 else:
@@ -160,7 +164,7 @@ async def start(client, message):
                         file_id=msg.get("file_id"),
                         caption=f_caption + f"\n\n<code>┈•••✿ @UniversalFilmStudio ✿•••┈\n\n💾 Size: {size}</code>",
                         parse_mode="html",
-                        protect_content=False,
+                        protect_content=settings["file_secure"],
                         reply_markup=InlineKeyboardMarkup(
                             [
                                 [
@@ -233,7 +237,7 @@ async def start(client, message):
         file_id=file_id,
         caption=f_caption,
         parse_mode="html",
-        protect_content=False,
+        protect_content=settings["file_secure"],
         reply_markup=InlineKeyboardMarkup(
             [
                 [
@@ -434,3 +438,91 @@ def send_help(client, chat_id, text, keyboard=None):
                         text=text,
                         parse_mode="markdown",
                         reply_markup=keyboard)
+
+
+@Client.on_message(filters.command('settings') & filters.private)
+async def settings(client, message):
+    userid = message.from_user.id if message.from_user else None
+    if not userid:
+        return await message.reply(f"You are anonymous admin. Use /connect {message.chat.id} in PM")
+    chat_type = message.chat.type
+    args = message.text.html.split(None, 1)
+
+    if chat_type == "private":
+        grpid = await active_connection(str(userid))
+        if grpid is not None:
+            grp_id = grpid
+            try:
+                chat = await client.get_chat(grpid)
+                title = chat.title
+            except:
+                await message.reply_text("Make sure I'm present in your group!!", quote=True)
+                return
+        else:
+            await message.reply_text("I'm not connected to any groups!", quote=True)
+            return
+
+    elif chat_type in ["group", "supergroup"]:
+        grp_id = message.chat.id
+        title = message.chat.title
+
+    else:
+        return
+
+    st = await client.get_chat_member(grp_id, userid)
+    if (
+            st.status != "administrator"
+            and st.status != "creator"
+            and str(userid) not in ADMINS
+    ):
+        return
+
+    if not await sett_db.is_settings_exist(str(grp_id)):
+        await sett_db.add_settings(str(grp_id), True)
+
+    settings = await sett_db.get_settings(str(grp_id))
+
+    if settings is not None:
+        buttons = [
+            [
+                InlineKeyboardButton('Filter Button', callback_data=f'setgs#button#{settings["button"]}#{str(grp_id)}'),
+                InlineKeyboardButton('Single' if settings["button"] else 'Double',
+                                     callback_data=f'setgs#button#{settings["button"]}#{str(grp_id)}')
+            ],
+            [
+                InlineKeyboardButton('Bot PM', callback_data=f'setgs#botpm#{settings["botpm"]}#{str(grp_id)}'),
+                InlineKeyboardButton('✅ Yes' if settings["botpm"] else '❌ No',
+                                     callback_data=f'setgs#botpm#{settings["botpm"]}#{str(grp_id)}')
+            ],
+            [
+                InlineKeyboardButton('File Secure',
+                                     callback_data=f'setgs#file_secure#{settings["file_secure"]}#{str(grp_id)}'),
+                InlineKeyboardButton('✅ Yes' if settings["file_secure"] else '❌ No',
+                                     callback_data=f'setgs#file_secure#{settings["file_secure"]}#{str(grp_id)}')
+            ],
+            [
+                InlineKeyboardButton('IMDB', callback_data=f'setgs#imdb#{settings["imdb"]}#{str(grp_id)}'),
+                InlineKeyboardButton('✅ Yes' if settings["imdb"] else '❌ No',
+                                     callback_data=f'setgs#imdb#{settings["imdb"]}#{str(grp_id)}')
+            ],
+            [
+                InlineKeyboardButton('Spell Check',
+                                     callback_data=f'setgs#spell_check#{settings["spell_check"]}#{str(grp_id)}'),
+                InlineKeyboardButton('✅ Yes' if settings["spell_check"] else '❌ No',
+                                     callback_data=f'setgs#spell_check#{settings["spell_check"]}#{str(grp_id)}')
+            ],
+            [
+                InlineKeyboardButton('Welcome', callback_data=f'setgs#welcome#{settings["welcome"]}#{str(grp_id)}'),
+                InlineKeyboardButton('✅ Yes' if settings["welcome"] else '❌ No',
+                                     callback_data=f'setgs#welcome#{settings["welcome"]}#{str(grp_id)}')
+            ]
+        ]
+        reply_markup = InlineKeyboardMarkup(buttons)
+
+        await message.reply_text(
+            text=f"<b>Change Your Filter Settings As Your Wish ⚙\n\nThis Settings For Group</b> <code>{title}</code>",
+            reply_markup=reply_markup,
+            disable_web_page_preview=True,
+            parse_mode="html",
+            reply_to_message_id=message.message_id
+        )
