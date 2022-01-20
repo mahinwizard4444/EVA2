@@ -15,7 +15,7 @@ from pyrogram.errors.exceptions.bad_request_400 import ChatAdminRequired
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
-from info import CHANNELS, ADMINS, AUTH_CHANNEL, CUSTOM_FILE_CAPTION, LOG_CHANNEL, PICS, HELPABLE
+from info import CHANNELS, ADMINS, AUTH_CHANNEL, CUSTOM_FILE_CAPTION, LOG_CHANNEL, PICS, HELPABLE, FILE_PROTECT
 from plugins.misc import paginate_modules
 from database.settings_db import sett_db
 from database.connections_mdb import active_connection
@@ -121,8 +121,10 @@ async def start(client, message):
     file_id = message.command[1]
     # unique_id, f_id, file_ref, caption = await get_batch(file_id)
 
-    grpid = await active_connection(str(message.from_user.id))
-    settings = await sett_db.get_settings(str(grpid))
+    # grpid = await active_connection(str(message.from_user.id))
+    settings = await sett_db.get_settings(str(FILE_PROTECT))
+    if not settings:
+        pass
     files_ = await get_file_details(file_id)
     if not files_:
         sts = await message.reply("`⏳ Please Wait...`", parse_mode='markdown')
@@ -155,7 +157,7 @@ async def start(client, message):
                         chat_id=message.from_user.id,
                         file_id=msg.get("file_id"),
                         caption=f_caption,
-                        protect_content=settings["file_secure"],
+                        protect_content=True,
                         caption_entities=entities,
                     )
                 else:
@@ -164,7 +166,7 @@ async def start(client, message):
                         file_id=msg.get("file_id"),
                         caption=f_caption + f"\n\n<code>┈•••✿ @UniversalFilmStudio ✿•••┈\n\n💾 Size: {size}</code>",
                         parse_mode="html",
-                        protect_content=settings["file_secure"],
+                        protect_content=True,
                         reply_markup=InlineKeyboardMarkup(
                             [
                                 [

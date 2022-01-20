@@ -408,6 +408,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ad_user = query.from_user.id
 
         settings = await sett_db.get_settings(str(query.message.chat.id))
+        FILE_PROTECT = str(query.message.chat.id)
         # if int(ad_user) in ADMINS:
         #     pass
         # elif int(user) != 0 and query.from_user.id != int(user):
