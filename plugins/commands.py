@@ -122,9 +122,9 @@ async def start(client, message):
     # unique_id, f_id, file_ref, caption = await get_batch(file_id)
 
     # grpid = await active_connection(str(message.from_user.id))
-    settings = await sett_db.get_settings(str(FILE_PROTECT))
-    if not settings:
-        pass
+    # settings = await sett_db.get_settings(str(FILE_PROTECT))
+    # if not settings:
+    #     pass
     files_ = await get_file_details(file_id)
     if not files_:
         sts = await message.reply("`⏳ Please Wait...`", parse_mode='markdown')
@@ -239,7 +239,7 @@ async def start(client, message):
         file_id=file_id,
         caption=f_caption,
         parse_mode="html",
-        protect_content=settings["file_secure"],
+        protect_content=True,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
