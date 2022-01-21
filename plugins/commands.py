@@ -121,10 +121,16 @@ async def start(client, message):
     file_id = message.command[1]
     # unique_id, f_id, file_ref, caption = await get_batch(file_id)
 
-    # grpid = await active_connection(str(message.from_user.id))
-    # settings = await sett_db.get_settings(str(FILE_PROTECT))
-    # if not settings:
-    #     pass
+    if FILE_PROTECT.get(message.from_user.id):
+        grpid = FILE_PROTECT.get(message.from_user.id)
+        settings = await sett_db.get_settings(str(grpid))
+        del FILE_PROTECT[message.from_user.id]
+    # FILE_PROTECT[message.from_user.id] = str(message.chat.id)
+
+    if not settings:
+        FILE_SECURE = False
+    else:
+        FILE_SECURE = settings["file_secure"]
     files_ = await get_file_details(file_id)
     if not files_:
         sts = await message.reply("`⏳ Please Wait...`", parse_mode='markdown')
@@ -157,7 +163,7 @@ async def start(client, message):
                         chat_id=message.from_user.id,
                         file_id=msg.get("file_id"),
                         caption=f_caption,
-                        protect_content=True,
+                        protect_content=FILE_SECURE,
                         caption_entities=entities,
                     )
                 else:
@@ -166,7 +172,7 @@ async def start(client, message):
                         file_id=msg.get("file_id"),
                         caption=f_caption + f"\n\n<code>┈•••✿ @UniversalFilmStudio ✿•••┈\n\n💾 Size: {size}</code>",
                         parse_mode="html",
-                        protect_content=True,
+                        protect_content=FILE_SECURE,
                         reply_markup=InlineKeyboardMarkup(
                             [
                                 [
@@ -239,7 +245,7 @@ async def start(client, message):
         file_id=file_id,
         caption=f_caption,
         parse_mode="html",
-        protect_content=True,
+        protect_content=FILE_SECURE,
         reply_markup=InlineKeyboardMarkup(
             [
                 [

@@ -117,6 +117,13 @@ async def next_page(bot, query):
 
     if not files:
         return
+
+    settings = await sett_db.get_settings(str(query.message.chat.id))
+    if settings is not None:
+        SINGLE_BUTTON = settings["button"]
+        SPELL_CHECK_REPLY = settings["spell_check"]
+        IMDB = settings["imdb"]
+
     if SINGLE_BUTTON:
         btn = [
             [
@@ -408,7 +415,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ad_user = query.from_user.id
 
         settings = await sett_db.get_settings(str(query.message.chat.id))
-        FILE_PROTECT = str(query.message.chat.id)
+        if settings is not None:
+            SINGLE_BUTTON = settings["button"]
+            SPELL_CHECK_REPLY = settings["spell_check"]
+            P_TTI_SHOW_OFF = settings["botpm"]
+            IMDB = settings["imdb"]
+
+        if FILE_PROTECT.get(query.from_user.id):
+            del FILE_PROTECT[query.from_user.id]
+        FILE_PROTECT[query.from_user.id] = str(query.message.chat.id)
         # if int(ad_user) in ADMINS:
         #     pass
         # elif int(user) != 0 and query.from_user.id != int(user):
@@ -436,7 +451,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             if AUTH_CHANNEL and not await is_subscribed(client, query):
                 await query.answer(url=f"https://t.me/{temp.U_NAME}?start={file_id}")
                 return
-            elif settings["botpm"]:     # P_TTI_SHOW_OFF
+            elif P_TTI_SHOW_OFF:     # P_TTI_SHOW_OFF
                 await query.answer(url=f"https://t.me/{temp.U_NAME}?start={file_id}")
                 return
             else:
@@ -445,7 +460,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     file_id=file_id,
                     caption=f_caption,
                     parse_mode="html",
-                    protect_content=settings["file_secure"],
+                    protect_content=settings["file_secure"] if settings["file_secure"] else False,
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [
@@ -876,6 +891,10 @@ async def check_manual_filter(group_id, keyword, message):
 
     if btn is not None:
         try:
+            if FILE_PROTECT.get(message.from_user.id):
+                del FILE_PROTECT[message.from_user.id]
+            FILE_PROTECT[message.from_user.id] = str(message.chat.id)
+
             if fileid == "None":
                 if btn == "[]":
                     d_msg = await message.reply_text(reply_text, disable_web_page_preview=True)
@@ -918,6 +937,10 @@ async def auto_filter(client, msg, spoll=False):
     if not spoll:
         message = msg
         settings = await sett_db.get_settings(str(message.chat.id))
+        if settings is not None:
+            SINGLE_BUTTON = settings["button"]
+            SPELL_CHECK_REPLY = settings["spell_check"]
+            IMDB = settings["imdb"]
         if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
             return
 
@@ -925,7 +948,7 @@ async def auto_filter(client, msg, spoll=False):
             search = message.text
             files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
             if not files:
-                if settings["spell_check"]:
+                if SPELL_CHECK_REPLY:
                     return await advantage_spell_chok(client, msg)
                 else:
                     Send_message = await client.send_video(
@@ -945,6 +968,11 @@ async def auto_filter(client, msg, spoll=False):
     else:
         message = msg.message.reply_to_message  # msg will be callback query
         settings = await sett_db.get_settings(str(message.chat.id))
+        if settings is not None:
+            SINGLE_BUTTON = settings["button"]
+            SPELL_CHECK_REPLY = settings["spell_check"]
+            IMDB = settings["imdb"]
+
         search, files, offset, total_results = spoll
         keywords = await get_filters(msg.message.chat.id)
         for keyword in reversed(sorted(keywords, key=len)):
@@ -954,7 +982,7 @@ async def auto_filter(client, msg, spoll=False):
                 await msg.message.delete()
                 return
 
-    if settings["button"]:
+    if SINGLE_BUTTON:
         btn = [
             [
                 InlineKeyboardButton(
@@ -995,7 +1023,7 @@ async def auto_filter(client, msg, spoll=False):
         InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
         InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewReleased")
     ])
-    imdb = await get_poster(search, file=(files[0]).file_name) if settings["imdb"] else None
+    imdb = await get_poster(search, file=(files[0]).file_name) if IMDB else None
     query_by = f"<b>ɴᴏ ᴏғ ғɪʟᴇs :</b> <code><b><i>{total_results}</i></b></code>\n" \
                f"<b>ʏᴏᴜʀ ϙᴜᴇʀʏ :</b> <code><b><i>{search}</i></b></code>\n" \
                f"<b>ʀᴇϙᴜᴇsᴛᴇᴅ ʙʏ :</b> <b><spoiler>{msg.from_user.first_name}</spoiler></b>"  # \

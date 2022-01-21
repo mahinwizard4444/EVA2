@@ -63,8 +63,8 @@ TG_MAX_MSG_SELECT = int(environ.get('TG_MAX_MSG_SELECT', 1000))
 USE_AS_BOT = environ.get("USE_AS_BOT", True)
 TMP_DOWNLOAD_DIRECTORY = "./UFSBotz/"
 INDEX_REQ_CHANNEL = int(environ.get('INDEX_REQ_CHANNEL', LOG_CHANNEL))
-FILE_PROTECT = ""
 
+FILE_PROTECT = {}
 IMPORTED = {}
 HELPABLE = {}
 dispatcher = None
