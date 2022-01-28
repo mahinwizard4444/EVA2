@@ -173,6 +173,10 @@ async def next_page(bot, query):
         )
 
     btn.insert(0, [
+        InlineKeyboardButton("⭕️ Wᴇʙ Sᴇʀɪᴇs ⭕️", url="https://t.me/UFSWebSeries")
+    ])
+
+    btn.insert(0, [
         InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
         InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewReleased")
     ])
@@ -1035,6 +1039,9 @@ async def auto_filter(client, msg, spoll=False):
         )
 
     btn.insert(0, [
+        InlineKeyboardButton("⭕️ Wᴇʙ Sᴇʀɪᴇs ⭕️", url="https://t.me/UFSWebSeries")
+    ])
+    btn.insert(0, [
         InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
         InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewReleased")
     ])
@@ -1210,6 +1217,11 @@ async def advantage_spell_chok(client, msg):
 
     btn.append(["❌ Close", f'spolling#{user}#close_spellcheck', False])
     btn = build_keyboard(btn)
+
+    btn.insert(0, [
+        InlineKeyboardButton("⭕️ Wᴇʙ Sᴇʀɪᴇs ⭕️", url="https://t.me/UFSWebSeries")
+    ])
+
     btn.insert(0, [
         InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
         InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewReleased")
