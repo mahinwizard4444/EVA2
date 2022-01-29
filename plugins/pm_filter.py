@@ -178,7 +178,7 @@ async def next_page(bot, query):
 
     btn.insert(0, [
         InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
-        InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewReleased")
+        InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewRelease")
     ])
     try:
         await query.edit_message_reply_markup(
@@ -959,7 +959,7 @@ async def auto_filter(client, msg, spoll=False):
                         chat_id=msg.chat.id,
                         video="https://telegra.ph/file/3e9f7db0c98e6b236c2c7.mp4",
                         caption=f"Couldn't Find This Movie.Please Try Again Or Search On Our "
-                                f"<b><a href='https://t.me/UFSNewReleased'>Channel</a></b>. \n\n"
+                                f"<b><a href='https://t.me/UFSNewRelease'>Channel</a></b>. \n\n"
                                 f"ഈ സിനിമയുടെ ഒറിജിനൽ പേര് ഗൂഗിളിൽ പോയി കണ്ടെത്തി അതുപോലെ ഇവിടെ കൊടുക്കുക 🥺",
                         parse_mode="html",
                         reply_to_message_id=msg.message_id
@@ -1043,7 +1043,7 @@ async def auto_filter(client, msg, spoll=False):
     ])
     btn.insert(0, [
         InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
-        InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewReleased")
+        InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewRelease")
     ])
     imdb = await get_poster(search, file=(files[0]).file_name) if IMDB else None
     query_by = f"<b>ɴᴏ ᴏғ ғɪʟᴇs :</b> <code><b><i>{total_results}</i></b></code>\n" \
@@ -1143,7 +1143,7 @@ async def advantage_spell_chok(client, msg):
             chat_id=msg.chat.id,
             video="https://telegra.ph/file/3e9f7db0c98e6b236c2c7.mp4",
             caption=f"Couldn't Find This Movie.Please Try Again Or Search On Our "
-                    f"<b><a href='https://t.me/UFSNewReleased'>Channel</a></b>. \n\n"
+                    f"<b><a href='https://t.me/UFSNewRelease'>Channel</a></b>. \n\n"
                     f"ഈ സിനിമയുടെ ഒറിജിനൽ പേര് ഗൂഗിളിൽ പോയി കണ്ടെത്തി അതുപോലെ ഇവിടെ കൊടുക്കുക 🥺",
             parse_mode="html",
             reply_to_message_id=msg.message_id
@@ -1183,7 +1183,7 @@ async def advantage_spell_chok(client, msg):
             chat_id=msg.chat.id,
             video="https://telegra.ph/file/3e9f7db0c98e6b236c2c7.mp4",
             caption=f"Couldn't Find This Movie.Please Try Again Or Search On Our "
-                    f"<b><a href='https://t.me/UFSNewReleased'>Channel</a></b>. \n\n"
+                    f"<b><a href='https://t.me/UFSNewRelease'>Channel</a></b>. \n\n"
                     f"ഈ സിനിമയുടെ ഒറിജിനൽ പേര് ഗൂഗിളിൽ പോയി കണ്ടെത്തി അതുപോലെ ഇവിടെ കൊടുക്കുക 🥺",
             parse_mode="html",
             reply_to_message_id=msg.message_id
@@ -1224,7 +1224,7 @@ async def advantage_spell_chok(client, msg):
 
     btn.insert(0, [
         InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
-        InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewReleased")
+        InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewRelease")
     ])
 
     # btn = [[
@@ -1236,7 +1236,7 @@ async def advantage_spell_chok(client, msg):
     # btn.append([InlineKeyboardButton(text="Close", callback_data=f'spolling#{user}#close_spellcheck')])
     # btn.insert(0, [
     #     InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
-    #     InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewReleased")
+    #     InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewRelease")
     # ])
     await msg.reply("I Couldn't Find Anything Related To That\nDid You Mean Any One Of These 👇🏻?",
                     reply_markup=InlineKeyboardMarkup(btn))
