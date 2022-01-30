@@ -156,7 +156,12 @@ async def start(client, message):
 
             if f_caption is None:
                 f_caption = f"{title}"
-            # f_caption = f_caption + f"\n\n<code>┈•••✿ @UniversalFilmStudio ✿•••┈\n\n💾 Size: {size}</code>"
+            f_sub_caption = f"<code>💾 Size: {size}</code>🌟༺ ──•◈•─ ─•◈•──༻🌟\n<b>➧ പുതിയ സിനിമകൾ / വെബ്‌ സീരീസ് " \
+                            f"വേണോ? എന്നാൽ പെട്ടെന്ന് ഗ്രൂപ്പിൽ ജോയിൻ ആയിക്കോ</b>\n\n<b>🔊 Gʀᴏᴜᴘ:</b> ┈•••✿ " \
+                            f"@UniversalFilmStudio ✿•••┈\n<b>🔊 Gʀᴏᴜᴘ:</b> ┈•••✿ @UFSWebSeries ✿•••┈\n<b>🔊 " \
+                            f"Cʜᴀɴɴᴇʟ:</b> ┈•••✿ @UFSNewRelease ✿•••┈\n\n🎗️ʝσιи 🎗️ ѕнαяє🎗️ ѕυρρσят🎗️ "
+
+            # f_caption + f"\n\n<code>┈•••✿ @UniversalFilmStudio ✿•••┈\n\n💾 Size: {size}</code>"
             try:
                 if file_type not in ["video", 'audio', 'document']:
                     await client.send_cached_media(
@@ -170,7 +175,7 @@ async def start(client, message):
                     await client.send_cached_media(
                         chat_id=message.from_user.id,
                         file_id=msg.get("file_id"),
-                        caption=f_caption + f"\n\n<code>┈•••✿ @UniversalFilmStudio ✿•••┈\n\n💾 Size: {size}</code>",
+                        caption=f_caption + f"\n\n{f_sub_caption}",
                         parse_mode="html",
                         protect_content=FILE_SECURE,
                         reply_markup=InlineKeyboardMarkup(
@@ -239,7 +244,12 @@ async def start(client, message):
             f_caption = f_caption
     if f_caption is None:
         f_caption = f"{files.file_name}"
-    f_caption = f_caption + f"\n\n<code>┈•••✿ @UniversalFilmStudio ✿•••┈\n\n💾 Size: {size}</code>"
+    f_sub_caption = f"<code>💾 Size: {size}</code>🌟༺ ──•◈•─ ─•◈•──༻🌟\n<b>➧ പുതിയ സിനിമകൾ / വെബ്‌ സീരീസ് " \
+                    f"വേണോ? എന്നാൽ പെട്ടെന്ന് ഗ്രൂപ്പിൽ ജോയിൻ ആയിക്കോ</b>\n\n<b>🔊 Gʀᴏᴜᴘ:</b> ┈•••✿ " \
+                    f"@UniversalFilmStudio ✿•••┈\n<b>🔊 Gʀᴏᴜᴘ:</b> ┈•••✿ @UFSWebSeries ✿•••┈\n<b>🔊 " \
+                    f"Cʜᴀɴɴᴇʟ:</b> ┈•••✿ @UFSNewRelease ✿•••┈\n\n🎗️ʝσιи 🎗️ ѕнαяє🎗️ ѕυρρσят🎗️ "
+
+    f_caption = f_caption + f"\n\n{f_sub_caption}"
     await client.send_cached_media(
         chat_id=message.from_user.id,
         file_id=file_id,
