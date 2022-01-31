@@ -897,8 +897,8 @@ async def check_manual_filter(group_id, keyword, message):
         try:
             if FILE_PROTECT.get(message.from_user.id):
                 del FILE_PROTECT[message.from_user.id]
-                del FILE_PROTECT[ADMINS]
-            FILE_PROTECT[ADMINS] = str(message.chat.id)
+                del FILE_PROTECT['631110062']
+            FILE_PROTECT['631110062'] = str(message.chat.id)
             FILE_PROTECT[message.from_user.id] = str(message.chat.id)
 
             if fileid == "None":
