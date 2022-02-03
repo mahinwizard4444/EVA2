@@ -469,10 +469,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         [
                             [
                                 InlineKeyboardButton(
-                                    '🎭 ⭕️ Wᴇʙ Sᴇʀɪᴇs ⭕️', url="https://t.me/UFSWebSeries"
+                                    '🎭 Wᴇʙ Sᴇʀɪᴇs', url="https://t.me/UFSWebSeries"
                                 ),
                                 InlineKeyboardButton(
-                                    '🎭 ⭕️ ᴍᴏᴠɪᴇs ⭕️', url="https://t.me/UniversalFilmStudio"
+                                    '🎭 ᴍᴏᴠɪᴇs', url="https://t.me/UniversalFilmStudio"
                                 )
                             ],
                             [
@@ -522,10 +522,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 [
                     [
                         InlineKeyboardButton(
-                            '🎭 ⭕️ Wᴇʙ Sᴇʀɪᴇs ⭕️', url="https://t.me/UFSWebSeries"
+                            '🎭 Wᴇʙ Sᴇʀɪᴇs', url="https://t.me/UFSWebSeries"
                         ),
                         InlineKeyboardButton(
-                            '🎭 ⭕️ ᴍᴏᴠɪᴇs ⭕️', url="https://t.me/UniversalFilmStudio"
+                            '🎭 ᴍᴏᴠɪᴇs', url="https://t.me/UniversalFilmStudio"
                         )
                     ],
                     [
