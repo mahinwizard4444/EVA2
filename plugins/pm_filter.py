@@ -469,7 +469,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         [
                             [
                                 InlineKeyboardButton(
-                                    '🎭 ⭕️ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
+                                    '🎭 ⭕️ Wᴇʙ Sᴇʀɪᴇs ⭕️', url="https://t.me/UFSWebSeries"
+                                ),
+                                InlineKeyboardButton(
+                                    '🎭 ⭕️ ᴍᴏᴠɪᴇs ⭕️', url="https://t.me/UniversalFilmStudio"
+                                )
+                            ],
+                            [
+                                InlineKeyboardButton(
+                                    '⭕️ ᴘᴍ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
                                 )
                             ]
                         ]
@@ -514,7 +522,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 [
                     [
                         InlineKeyboardButton(
-                            '🎭 ⭕️ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
+                            '🎭 ⭕️ Wᴇʙ Sᴇʀɪᴇs ⭕️', url="https://t.me/UFSWebSeries"
+                        ),
+                        InlineKeyboardButton(
+                            '🎭 ⭕️ ᴍᴏᴠɪᴇs ⭕️', url="https://t.me/UniversalFilmStudio"
+                        )
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            '⭕️ ᴘᴍ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
                         )
                     ]
                 ]
