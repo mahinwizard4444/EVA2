@@ -214,6 +214,7 @@ async def advantage_spoll_choker(bot, query):
         k = await query.message.edit('This Movie Not Found In DataBase')
         await asyncio.sleep(10)
         await k.delete()
+        await query.delete()
 
 
 @Client.on_callback_query()
@@ -1205,6 +1206,7 @@ async def advantage_spell_chok(client, msg):
         )
         await asyncio.sleep(15)  # in seconds
         await Send_message.delete()
+        await msg.delete()
         # k = await msg.reply("I couldn't find any movie in that name.")
         # await asyncio.sleep(8)
         # await k.delete()
@@ -1245,6 +1247,7 @@ async def advantage_spell_chok(client, msg):
         )
         await asyncio.sleep(15)  # in seconds
         await Send_message.delete()
+        await msg.delete()
         # k = await msg.reply("I Couldn't Find Anything Related To That. Check Your Spelling")
         # await asyncio.sleep(8)
         # await k.delete()
