@@ -911,8 +911,12 @@ async def cb_handler(client: Client, query: CallbackQuery):
     # ######################### MODULE HELP END #############################################################
 
 
-async def check_manual_filter(group_id, keyword, message):
+async def check_manual_filter(group_id, keyword, msg):
     reply_text, btn, alert, fileid = await find_filter(group_id, keyword)
+    if msg.message.reply_to_message:
+        message = msg.message.reply_to_message
+    else:
+        message = msg
 
     if reply_text:
         reply_text = reply_text.replace("\\n", "\n").replace("\\t", "\t")
@@ -937,10 +941,10 @@ async def check_manual_filter(group_id, keyword, message):
                 if btn == "[]":
                     d_msg = await message.reply_text(reply_text, disable_web_page_preview=True)
 
-                if AUTO_DELETE:
-                    await asyncio.sleep(int(DELETE_TIME))
-                    await message.delete()
-                    await d_msg.delete()
+                # if AUTO_DELETE:
+                #     await asyncio.sleep(int(DELETE_TIME))
+                #     await message.delete()
+                #     await d_msg.delete()
                 else:
                     button = eval(btn)
                     d_msg = await message.reply_text(
@@ -948,6 +952,9 @@ async def check_manual_filter(group_id, keyword, message):
                         disable_web_page_preview=True,
                         reply_markup=InlineKeyboardMarkup(button)
                     )
+
+                if msg.message.reply_to_message:
+                    await msg.message.delete()
 
                 if AUTO_DELETE:
                     await asyncio.sleep(int(DELETE_TIME))
@@ -958,6 +965,9 @@ async def check_manual_filter(group_id, keyword, message):
                     fileid,
                     caption=reply_text or ""
                 )
+
+                if msg.message.reply_to_message:
+                    await msg.message.delete()
 
                 if AUTO_DELETE:
                     await asyncio.sleep(int(DELETE_TIME))
@@ -970,6 +980,9 @@ async def check_manual_filter(group_id, keyword, message):
                     caption=reply_text or "",
                     reply_markup=InlineKeyboardMarkup(button)
                 )
+
+                if msg.message.reply_to_message:
+                    await msg.message.delete()
 
                 if AUTO_DELETE:
                     await asyncio.sleep(int(DELETE_TIME))
@@ -1028,8 +1041,8 @@ async def auto_filter(client, msg, spoll=False):
         for keyword in reversed(sorted(keywords, key=len)):
             pattern = r"( |^|[^\w])" + re.escape(keyword) + r"( |$|[^\w])"
             if re.search(pattern, search, flags=re.IGNORECASE):
-                await check_manual_filter(message.chat.id, keyword, message)
-                await msg.message.delete()
+                await check_manual_filter(message.chat.id, keyword, msg)
+                # await msg.message.delete()
                 return
 
     if SINGLE_BUTTON:
@@ -1140,19 +1153,19 @@ async def auto_filter(client, msg, spoll=False):
             d_msg = await message.reply_photo(photo=imdb.get('poster'), caption=cap,
                                               reply_markup=InlineKeyboardMarkup(btn))
 
-            if AUTO_DELETE:
-                await asyncio.sleep(int(DELETE_TIME))
-                await message.delete()
-                await d_msg.delete()
+            # if AUTO_DELETE:
+            #     await asyncio.sleep(int(DELETE_TIME))
+            #     await message.delete()
+            #     await d_msg.delete()
         except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
             pic = imdb.get('poster')
             poster = pic.replace('.jpg', "._V1_UX360.jpg")
             d_msg = await message.reply_photo(photo=poster, caption=cap, reply_markup=InlineKeyboardMarkup(btn))
 
-            if AUTO_DELETE:
-                await asyncio.sleep(int(DELETE_TIME))
-                await message.delete()
-                await d_msg.delete()
+            # if AUTO_DELETE:
+            #     await asyncio.sleep(int(DELETE_TIME))
+            #     await message.delete()
+            #     await d_msg.delete()
         except Exception as e:
             logger.exception(e)
             # await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
@@ -1164,10 +1177,10 @@ async def auto_filter(client, msg, spoll=False):
                 parse_mode="html",
                 reply_to_message_id=msg.message_id)
 
-            if AUTO_DELETE:
-                await asyncio.sleep(int(DELETE_TIME))
-                await message.delete()
-                await d_msg.delete()
+            # if AUTO_DELETE:
+            #     await asyncio.sleep(int(DELETE_TIME))
+            #     await message.delete()
+            #     await d_msg.delete()
     else:
         # await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
         d_msg = await client.send_photo(
@@ -1177,13 +1190,13 @@ async def auto_filter(client, msg, spoll=False):
             reply_markup=InlineKeyboardMarkup(btn),
             parse_mode="html",
             reply_to_message_id=msg.message_id)
-
-        if AUTO_DELETE:
-            await asyncio.sleep(int(DELETE_TIME))
-            await message.delete()
-            await d_msg.delete()
     if spoll:
         await msg.message.delete()
+
+    if AUTO_DELETE:
+        await asyncio.sleep(int(DELETE_TIME))
+        await message.delete()
+        await d_msg.delete()
 
 
 async def advantage_spell_chok(client, msg):
