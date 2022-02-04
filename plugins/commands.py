@@ -512,43 +512,53 @@ async def settings(client, message):
         return
 
     if not await sett_db.is_settings_exist(str(grp_id)):
-        await sett_db.add_settings(str(grp_id), True)
+        await sett_db.add_settings(str(grp_id), True, 120)
 
     settings = await sett_db.get_settings(str(grp_id))
 
     if settings is not None:
         buttons = [
             [
-                InlineKeyboardButton('Filter Button', callback_data=f'setgs#button#{settings["button"]}#{str(grp_id)}'),
+                InlineKeyboardButton('Filter Button',
+                                     callback_data=f'setgs#button#{settings["button"]}#{str(grp_id)}#{settings["delete_time"]}'),
                 InlineKeyboardButton('Single' if settings["button"] else 'Double',
-                                     callback_data=f'setgs#button#{settings["button"]}#{str(grp_id)}')
+                                     callback_data=f'setgs#button#{settings["button"]}#{str(grp_id)}#{settings["delete_time"]}')
             ],
             [
-                InlineKeyboardButton('Bot PM', callback_data=f'setgs#botpm#{settings["botpm"]}#{str(grp_id)}'),
+                InlineKeyboardButton('Bot PM',
+                                     callback_data=f'setgs#botpm#{settings["botpm"]}#{str(grp_id)}#{settings["delete_time"]}'),
                 InlineKeyboardButton('✅ Yes' if settings["botpm"] else '❌ No',
-                                     callback_data=f'setgs#botpm#{settings["botpm"]}#{str(grp_id)}')
+                                     callback_data=f'setgs#botpm#{settings["botpm"]}#{str(grp_id)}#{settings["delete_time"]}')
             ],
             [
                 InlineKeyboardButton('File Secure',
-                                     callback_data=f'setgs#file_secure#{settings["file_secure"]}#{str(grp_id)}'),
+                                     callback_data=f'setgs#file_secure#{settings["file_secure"]}#{str(grp_id)}#{settings["delete_time"]}'),
                 InlineKeyboardButton('✅ Yes' if settings["file_secure"] else '❌ No',
-                                     callback_data=f'setgs#file_secure#{settings["file_secure"]}#{str(grp_id)}')
+                                     callback_data=f'setgs#file_secure#{settings["file_secure"]}#{str(grp_id)}#{settings["delete_time"]}')
             ],
             [
-                InlineKeyboardButton('IMDB', callback_data=f'setgs#imdb#{settings["imdb"]}#{str(grp_id)}'),
+                InlineKeyboardButton('IMDB',
+                                     callback_data=f'setgs#imdb#{settings["imdb"]}#{str(grp_id)}#{settings["delete_time"]}'),
                 InlineKeyboardButton('✅ Yes' if settings["imdb"] else '❌ No',
-                                     callback_data=f'setgs#imdb#{settings["imdb"]}#{str(grp_id)}')
+                                     callback_data=f'setgs#imdb#{settings["imdb"]}#{str(grp_id)}#{settings["delete_time"]}')
             ],
             [
                 InlineKeyboardButton('Spell Check',
-                                     callback_data=f'setgs#spell_check#{settings["spell_check"]}#{str(grp_id)}'),
+                                     callback_data=f'setgs#spell_check#{settings["spell_check"]}#{str(grp_id)}#{settings["delete_time"]}'),
                 InlineKeyboardButton('✅ Yes' if settings["spell_check"] else '❌ No',
-                                     callback_data=f'setgs#spell_check#{settings["spell_check"]}#{str(grp_id)}')
+                                     callback_data=f'setgs#spell_check#{settings["spell_check"]}#{str(grp_id)}#{settings["delete_time"]}')
             ],
             [
-                InlineKeyboardButton('Welcome', callback_data=f'setgs#welcome#{settings["welcome"]}#{str(grp_id)}'),
+                InlineKeyboardButton('Auto Delete',
+                                     callback_data=f'setgs#delete#{settings["auto_delete"]}#{str(grp_id)}#{settings["delete_time"]}'),
+                InlineKeyboardButton(f'{settings["delete_time"]} Sec' if settings["auto_delete"] else '❌ No',
+                                     callback_data=f'setgs#delete#{settings["auto_delete"]}#{str(grp_id)}#{settings["delete_time"]}')
+            ],
+            [
+                InlineKeyboardButton('Welcome',
+                                     callback_data=f'setgs#welcome#{settings["welcome"]}#{str(grp_id)}#{settings["delete_time"]}'),
                 InlineKeyboardButton('✅ Yes' if settings["welcome"] else '❌ No',
-                                     callback_data=f'setgs#welcome#{settings["welcome"]}#{str(grp_id)}')
+                                     callback_data=f'setgs#welcome#{settings["welcome"]}#{str(grp_id)}#{settings["delete_time"]}')
             ]
         ]
         reply_markup = InlineKeyboardMarkup(buttons)
