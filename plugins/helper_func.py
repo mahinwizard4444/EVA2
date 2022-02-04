@@ -96,3 +96,48 @@ def get_file_id(msg: Message):
             if obj:
                 setattr(obj, "message_type", message_type)
                 return obj
+
+
+def TimeFormatter(milliseconds: int) -> str:
+    seconds, milliseconds = divmod(int(milliseconds), 1000)
+    minutes, seconds = divmod(seconds, 60)
+    hours, minutes = divmod(minutes, 60)
+    days, hours = divmod(hours, 24)
+    tmp = (
+        ((str(days) + " Dᴀʏs, ") if days else "")
+        + ((str(hours) + " Hᴏᴜʀs, ") if hours else "")
+        + ((str(minutes) + " Mɪɴᴜᴛᴇs, ") if minutes else "")
+        + ((str(seconds) + " Sᴇᴄᴏɴᴅs, ") if seconds else "")
+        + ((str(milliseconds) + " Mɪʟʟɪsᴇᴄᴏɴᴅs, ") if milliseconds else "")
+    )
+    return tmp[:-2]
+
+
+# class CustomFilters(object):
+#     class _Supporters(BaseFilter):
+#         def filter(self, message: Message):
+#             return bool(message.from_user and message.from_user.id in SUPPORT_USERS)
+#
+#     support_filter = _Supporters()
+#
+#     class _Sudoers(BaseFilter):
+#         def filter(self, message: Message):
+#             return bool(message.from_user and message.from_user.id in SUDO_USERS)
+#
+#     sudo_filter = _Sudoers()
+#
+#     class _MimeType(BaseFilter):
+#         def __init__(self, mimetype):
+#             self.mime_type = mimetype
+#             self.name = "CustomFilters.mime_type({})".format(self.mime_type)
+#
+#         def filter(self, message: Message):
+#             return bool(message.document and message.document.mime_type == self.mime_type)
+#
+#     mime_type = _MimeType
+#
+#     class _HasText(BaseFilter):
+#         def filter(self, message: Message):
+#             return bool(message.text or message.sticker or message.photo or message.document or message.video)
+#
+#     has_text = _HasText()

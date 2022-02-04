@@ -24,7 +24,7 @@ def is_enabled(value, default):
 SESSION = environ.get('SESSION', 'UFSBotz')
 API_ID = int(environ.get('API_ID', '3607361'))
 API_HASH = environ.get('API_HASH', 'c57bcc4b09591db4f90f60b469e8870f')
-BOT_TOKEN = environ.get('BOT_TOKEN', '1704819274:AAE8onh3G4s4MerzWyo39Fcd4GiZIsdHAqc')
+BOT_TOKEN = environ.get('BOT_TOKEN', '1635091229:AAE40V_s07MAKJRDM-LTL2dPIXyG9iW8rBk')
 
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
@@ -62,6 +62,8 @@ SHORT_LINK_API_KEY = environ.get("SHORT_LINK_API_KEY", None)
 TG_MAX_MSG_SELECT = int(environ.get('TG_MAX_MSG_SELECT', 1000))
 USE_AS_BOT = environ.get("USE_AS_BOT", True)
 TMP_DOWNLOAD_DIRECTORY = "./UFSBotz/"
+AUTO_DELETE = True
+DELETE_TIME  = 120
 INDEX_REQ_CHANNEL = int(environ.get('INDEX_REQ_CHANNEL', LOG_CHANNEL))
 
 FILE_PROTECT = {}
