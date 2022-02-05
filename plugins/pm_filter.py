@@ -53,7 +53,7 @@ async def give_filter(client, message):
     for keyword in reversed(sorted(keywords, key=len)):
         pattern = r"( |^|[^\w])" + re.escape(keyword) + r"( |$|[^\w])"
         if re.search(pattern, name, flags=re.IGNORECASE):
-            await check_manual_filter(group_id, keyword, message)
+            await check_manual_filter(client, group_id, keyword, message, 0)
             return
             # reply_text, btn, alert, fileid = await find_filter(group_id, keyword)
             #
@@ -911,12 +911,12 @@ async def cb_handler(client: Client, query: CallbackQuery):
     # ######################### MODULE HELP END #############################################################
 
 
-async def check_manual_filter(group_id, keyword, msg):
+async def check_manual_filter(client, group_id, keyword, message, msg):
     reply_text, btn, alert, fileid = await find_filter(group_id, keyword)
-    if msg.message.reply_to_message:
-        message = msg.message.reply_to_message
-    else:
-        message = msg
+    # if bool(msg.message.reply_to_message):
+    #     message = msg.message.reply_to_message
+    # else:
+    #     message = msg
 
     if reply_text:
         reply_text = reply_text.replace("\\n", "\n").replace("\\t", "\t")
@@ -953,8 +953,9 @@ async def check_manual_filter(group_id, keyword, msg):
                         reply_markup=InlineKeyboardMarkup(button)
                     )
 
-                if msg.message.reply_to_message:
-                    await msg.message.delete()
+                if int(msg) > 0:
+                    await client.delete_messages(chat_id=group_id, message_ids=int(msg))
+                    # await msg.message.delete()
 
                 if AUTO_DELETE:
                     await asyncio.sleep(int(DELETE_TIME))
@@ -966,8 +967,9 @@ async def check_manual_filter(group_id, keyword, msg):
                     caption=reply_text or ""
                 )
 
-                if msg.message.reply_to_message:
-                    await msg.message.delete()
+                if int(msg) > 0:
+                    await client.delete_messages(chat_id=group_id, message_ids=int(msg))
+                    # await msg.message.delete()
 
                 if AUTO_DELETE:
                     await asyncio.sleep(int(DELETE_TIME))
@@ -981,8 +983,9 @@ async def check_manual_filter(group_id, keyword, msg):
                     reply_markup=InlineKeyboardMarkup(button)
                 )
 
-                if msg.message.reply_to_message:
-                    await msg.message.delete()
+                if int(msg) > 0:
+                    await client.delete_messages(chat_id=group_id, message_ids=int(msg))
+                    # await msg.message.delete()
 
                 if AUTO_DELETE:
                     await asyncio.sleep(int(DELETE_TIME))
@@ -1041,7 +1044,7 @@ async def auto_filter(client, msg, spoll=False):
         for keyword in reversed(sorted(keywords, key=len)):
             pattern = r"( |^|[^\w])" + re.escape(keyword) + r"( |$|[^\w])"
             if re.search(pattern, search, flags=re.IGNORECASE):
-                await check_manual_filter(message.chat.id, keyword, msg)
+                await check_manual_filter(client, message.chat.id, keyword, message, msg.message.message_id)
                 # await msg.message.delete()
                 return
 
