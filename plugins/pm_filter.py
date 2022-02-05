@@ -927,7 +927,7 @@ async def check_manual_filter(client, group_id, keyword, message, msg):
         DELETE_TIME = settings["delete_time"]
 
     if AUTO_DELETE:
-        reply_text = reply_text + f"\n\n<b><u>Aᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ Dᴇʟᴇᴛᴇ Tʜɪs Rᴇϙᴜᴇsᴛ Aғᴛᴇʀ {TimeFormatter(int(DELETE_TIME) * 1000)}</u></b>"
+        reply_text = reply_text + f"<b><u>Aᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ Dᴇʟᴇᴛᴇ Tʜɪs Rᴇϙᴜᴇsᴛ Aғᴛᴇʀ {TimeFormatter(int(DELETE_TIME) * 1000)}</u></b>"
 
     if btn is not None:
         try:
