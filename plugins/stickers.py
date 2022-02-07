@@ -41,7 +41,7 @@ async def getstickerasfile(bot, message):
                     #   zip_path= ZipFile.write("")
                     await tx.edit("Uploading...")
                     start = time.time()
-                    powered_by = "<b>[<a href='https://t.me/UFSBotz'>©𝙐𝙁𝙎 𝘽𝙤𝙩𝙯</a>]</b>"
+                    powered_by = "<b>[<a href='https://t.me/TvSeriesLand4U'>©𝕄𝕚𝕝𝕝𝕚𝕖</a>]</b>"
                     await message.reply_document(
                         document=file_path,
                         caption=f"💫 ℙ𝕠𝕨𝕖𝕣𝕖𝕕 𝔹𝕪 : {powered_by}",
@@ -60,7 +60,7 @@ async def getstickerasfile(bot, message):
                     await tx.edit("Downloaded")
                     await tx.edit("Uploading...")
                     start = time.time()
-                    powered_by = "<b>[<a href='https://t.me/UFSBotz'>©𝙐𝙁𝙎 𝘽𝙤𝙩𝙯</a>]</b>"
+                    powered_by = "<b>[<a href='https://t.me/TvSeriesLand4U'>𝕄𝕚𝕝𝕝𝕚𝕖</a>]</b>"
                     await message.reply_document(
                         document=file_path,
                         caption=f"💫 ℙ𝕠𝕨𝕖𝕣𝕖𝕕 𝔹𝕪 : {powered_by}",
