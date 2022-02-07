@@ -32,7 +32,7 @@ async def start(client, message):
         if message.from_user.id in ADMINS:
             buttons = [
                 [
-                    InlineKeyboardButton('🤖 Updates', url='https://t.me/TeamEvamaria')
+                    InlineKeyboardButton('🗞️ Updates', url='https://t.me/M76Links')
                 ],
                 [
                     InlineKeyboardButton('ℹ️ Help', url=f"https://t.me/{temp.U_NAME}?start=help"),
@@ -54,7 +54,7 @@ async def start(client, message):
             return
         else:
             btn = [[
-                InlineKeyboardButton("⭕️ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/testufsbot")
+                InlineKeyboardButton("🚀 Updates", url="https://t.me/TvSeriesLand4U_Updates")
             ]]
             message.reply("Goto My PM, Then Click Start.. Here You Are Restricted By Admins...", reply_markup=btn)
             return
@@ -65,7 +65,7 @@ async def start(client, message):
     if len(message.command) != 2:
         buttons = [[
             InlineKeyboardButton('🔍 Search', switch_inline_query_current_chat=''),
-            InlineKeyboardButton('🤖 Updates', url='https://t.me/EvaMariaUpdates')
+            InlineKeyboardButton('🗞️ Updates', url='https://t.me/M76Links')
         ], [
             InlineKeyboardButton('ℹ️Help', callback_data='help'),
             InlineKeyboardButton('😊 About', callback_data='about')
@@ -104,7 +104,7 @@ async def start(client, message):
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
         buttons = [[
             InlineKeyboardButton('🔍 Search', switch_inline_query_current_chat=''),
-            InlineKeyboardButton('🤖 Updates', url='https://t.me/TeamEvamaria')
+            InlineKeyboardButton('🗞️ Updates', url='https://t.me/TvSeriesLand4U_Updates')
         ], [
             InlineKeyboardButton('ℹ️Help', callback_data='help'),
             InlineKeyboardButton('😊 About', callback_data='about')
@@ -156,12 +156,12 @@ async def start(client, message):
 
             if f_caption is None:
                 f_caption = f"{title}"
-            f_sub_caption = f"<code>💾 Size: {size}</code>\n\n🌟༺ ──•◈•─ ─•◈•──༻🌟\n<b>➧ പുതിയ സിനിമകൾ / വെബ്‌ സീരീസ് " \
-                    f"വേണോ? എന്നാൽ പെട്ടെന്ന് ഗ്രൂപ്പിൽ ജോയിൻ ആയിക്കോ\n\n🔊 Gʀᴏᴜᴘ: " \
-                    f"@UniversalFilmStudio \n🔊 Gʀᴏᴜᴘ: @UFSWebSeries \n🔊 " \
-                    f"Cʜᴀɴɴᴇʟ: @UFSNewRelease \n\n🎗️ʝσιи 🎗️ ѕнαяє🎗️ ѕυρρσят🎗️ </b>"
+            f_sub_caption = f"<code>🚀 Size: {size}</code>\n\n🌟༺ ──•◈•─ ─•◈•──༻🌟\n<b>➧ പുതിയ സിനിമകൾ / വെബ്‌ സീരീസ് " \
+                    f"വേണോ? എന്നാൽ പെട്ടെന്ന് ഗ്രൂപ്പിൽ ജോയിൻ ആയിക്കോ\n\n🎬 Gʀᴏᴜᴘ: " \
+                    f"@onlymovie76 \n📺 Gʀᴏᴜᴘ: @TvSeriesLand4U \n🗞️ " \
+                    f"Cʜᴀɴɴᴇʟ: @M76Links \n\n🎗️ʝσιи 🎗️ ѕнαяє🎗️ ѕυρρσят🎗️ </b>"
 
-            # f_caption + f"\n\n<code>┈•••✿ @UniversalFilmStudio ✿•••┈\n\n💾 Size: {size}</code>"
+            # f_caption + f"\n\n<code>Join:-@TvSeriesLand4U \n\n🚀 Size: {size}</code>"
             try:
                 if file_type not in ["video", 'audio', 'document']:
                     await client.send_cached_media(
@@ -182,15 +182,15 @@ async def start(client, message):
                             [
                                 [
                                     InlineKeyboardButton(
-                                        '🎭 Wᴇʙ Sᴇʀɪᴇs', url="https://t.me/UFSWebSeries"
+                                        '📺 Wᴇʙ Sᴇʀɪᴇs', url="https://t.me/TvSeriesLand4U"
                                     ),
                                     InlineKeyboardButton(
-                                        '🎭 ᴍᴏᴠɪᴇs', url="https://t.me/UniversalFilmStudio"
+                                        '🎬 ᴍᴏᴠɪᴇs', url="https://t.me/onlymovie76"
                                     )
                                 ],
                                 [
                                     InlineKeyboardButton(
-                                        '⭕️ ᴘᴍ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
+                                        '🗞️ Updates', url="https://t.me/M76Links"
                                     )
                                 ]
                             ]
@@ -200,7 +200,7 @@ async def start(client, message):
                 await sts.edit("FAILED")
                 return await client.send_message(LOG_CHANNEL, f"{str(err)}")
             await asyncio.sleep(0.5)
-        return await message.reply(f"<b><a href='https://t.me/UniversalFilmStudio'>Thank For Using Me...</a></b>")
+        return await message.reply(f"<b><a href='https://t.me/TvSeriesLand4U'>Thank For Using Me...</a></b>")
 
     # if unique_id:
     #     temp_msg = await message.reply("Please wait...")
@@ -213,7 +213,7 @@ async def start(client, message):
     #         f_caption = cap_args[i]
     #         if f_caption is None:
     #             f_caption = ""
-    #         f_caption = f_caption + f"\n\n<code>┈•••✿</code> @UniversalFilmStudio <code>✿•••┈</code>"
+    #         f_caption = f_caption + f"\n\n<code>Join:-</code> @TvSeriesLand4U </code>"
     #         i += 1
     #         try:
     #             await client.send_cached_media(
@@ -225,7 +225,7 @@ async def start(client, message):
     #                     [
     #                         [
     #                             InlineKeyboardButton(
-    #                                 '🎭 ⭕️ ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
+    #                                 '💬 ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ 💬', url="https://t.me/TvSeriesLandAdminBot"
     #                             )
     #                         ]
     #                     ]
@@ -235,7 +235,7 @@ async def start(client, message):
     #             return await message.reply(f"{str(err)}")
     #         await asyncio.sleep(1)
     #
-    #     return await message.reply(f"<b><a href='https://t.me/UniversalFilmStudio'>Thank For Using Me...</a></b>")
+    #     return await message.reply(f"<b><a href='https://t.me/TvSeriesLand4U'>Thank For Using Me...</a></b>")
 
     files_ = await get_file_details(file_id)
     if not files_:
@@ -252,10 +252,10 @@ async def start(client, message):
             f_caption = f_caption
     if f_caption is None:
         f_caption = f"{files.file_name}"
-    f_sub_caption = f"<code>💾 Size: {size}</code>\n\n🌟༺ ──•◈•─ ─•◈•──༻🌟\n<b>➧ പുതിയ സിനിമകൾ / വെബ്‌ സീരീസ് " \
-                    f"വേണോ? എന്നാൽ പെട്ടെന്ന് ഗ്രൂപ്പിൽ ജോയിൻ ആയിക്കോ\n\n🔊 Gʀᴏᴜᴘ: " \
-                    f"@UniversalFilmStudio \n🔊 Gʀᴏᴜᴘ: @UFSWebSeries \n🔊 " \
-                    f"Cʜᴀɴɴᴇʟ: @UFSNewRelease \n\n🎗️ʝσιи 🎗️ ѕнαяє🎗️ ѕυρρσят🎗️ </b>"
+    f_sub_caption = f"<code>🚀 Size: {size}</code>\n\n🌟༺ ──•◈•─ ─•◈•──༻🌟\n<b>➧ പുതിയ സിനിമകൾ / വെബ്‌ സീരീസ് " \
+                    f"വേണോ? എന്നാൽ പെട്ടെന്ന് ഗ്രൂപ്പിൽ ജോയിൻ ആയിക്കോ\n\n🎬 Gʀᴏᴜᴘ: " \
+                    f"@onlymovie76 \n📺 Gʀᴏᴜᴘ: @TvSeriesLand4U \n🗞️ " \
+                    f"Cʜᴀɴɴᴇʟ: @M76Links \n\n🎗️ʝσιи 🎗️ ѕнαяє🎗️ ѕυρρσят🎗️ </b>"
 
     f_caption = f_caption + f"\n\n{f_sub_caption}"
     await client.send_cached_media(
@@ -268,15 +268,15 @@ async def start(client, message):
             [
                 [
                     InlineKeyboardButton(
-                        '🎭 Wᴇʙ Sᴇʀɪᴇs', url="https://t.me/UFSWebSeries"
+                        '📺 Wᴇʙ Sᴇʀɪᴇs', url="https://t.me/TvSeriesLand4U"
                     ),
                     InlineKeyboardButton(
-                        '🎭 ᴍᴏᴠɪᴇs', url="https://t.me/UniversalFilmStudio"
+                        '🎬 ᴍᴏᴠɪᴇs', url="https://t.me/onlymovie76"
                     )
                 ],
                 [
                     InlineKeyboardButton(
-                        '⭕️ ᴘᴍ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
+                        '🗞️ Updates', url="https://t.me/M76Links"
                     )
                 ]
             ]
@@ -557,7 +557,7 @@ async def settings(client, message):
             [
                 InlineKeyboardButton('Welcome',
                                      callback_data=f'setgs#welcome#{settings["welcome"]}#{str(grp_id)}#{settings["delete_time"]}'),
-                InlineKeyboardButton('✅ Yes' if settings["welcome"] else '❌ No',
+                InlineKeyboardButton('✅ Yes' if settings["welcome"] else '❌️ No',
                                      callback_data=f'setgs#welcome#{settings["welcome"]}#{str(grp_id)}#{settings["delete_time"]}')
             ]
         ]
