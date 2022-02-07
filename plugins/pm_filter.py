@@ -174,12 +174,12 @@ async def next_page(bot, query):
         )
 
     btn.insert(0, [
-        InlineKeyboardButton("⭕️ Wᴇʙ Sᴇʀɪᴇs ⭕️", url="https://t.me/UFSWebSeries")
+        InlineKeyboardButton("📺 𝕊𝕖𝕣𝕚𝕖𝕤 𝕌𝕡𝕕𝕒𝕥𝕖𝕤 📺", url="https://t.me/TvSeriesLand4U")
     ])
 
     btn.insert(0, [
-        InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
-        InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewRelease")
+        InlineKeyboardButton("🎬 𝕄𝕠𝕧𝕚𝕖 🎬", url="https://t.me/onlymovie76"),
+        InlineKeyboardButton("🗞️ 𝕆𝕋𝕋 𝕌𝕡𝕕𝕒𝕥𝕖𝕤 🗞️", url="https://t.me/M76Links")
     ])
     try:
         await query.edit_message_reply_markup(
@@ -205,13 +205,13 @@ async def advantage_spoll_choker(bot, query):
     if not movies:
         return await query.answer("You Are Clicking On An Old Button Which Is Expired.", show_alert=True)
     movie = movies[(int(movie_))]
-    await query.answer('Checking For Movie In Database...')
+    await query.answer('Checking For Series In Database...')
     files, offset, total_results = await get_search_results(movie, offset=0, filter=True)
     if files:
         k = (movie, files, offset, total_results)
         await auto_filter(bot, query, k)
     else:
-        k = await query.message.edit('This Movie Not Found In DataBase')
+        k = await query.message.edit('This Series Not Found In DataBase')
         await asyncio.sleep(10)
         await query.message.reply_to_message.delete()
         await k.delete()
@@ -451,7 +451,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             f_caption = f_caption
         if f_caption is None:
             f_caption = f"{files.file_name}"
-        f_caption = f_caption + f"\n\n<code>┈•••✿ @UniversalFilmStudio ✿•••┈\n\n💾 Size: {size}</code>"
+        f_caption = f_caption + f"\n\n<code> ✰ @TvSeriesLand4U ✰\n\n🚀 Size: {size}</code>"
 
         try:
             if AUTH_CHANNEL and not await is_subscribed(client, query):
@@ -471,15 +471,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         [
                             [
                                 InlineKeyboardButton(
-                                    '🎭 Wᴇʙ Sᴇʀɪᴇs', url="https://t.me/UFSWebSeries"
+                                    '📺 Wᴇʙ Sᴇʀɪᴇs', url="https://t.me/TvSeriesLand4U"
                                 ),
                                 InlineKeyboardButton(
-                                    '🎭 ᴍᴏᴠɪᴇs', url="https://t.me/UniversalFilmStudio"
+                                    '🎬 ᴍᴏᴠɪᴇs', url="https://t.me/onlymovie76"
                                 )
                             ],
                             [
                                 InlineKeyboardButton(
-                                    '⭕️ ᴘᴍ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
+                                    '🗞️ Updates', url="https://t.me/M76Links"
                                 )
                             ]
                         ]
@@ -512,7 +512,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 f_caption = f_caption
         if f_caption is None:
             f_caption = f"{title}"
-        f_caption = f_caption + f"\n\n<code>┈•••✿ @UniversalFilmStudio ✿•••┈\n\n💾 Size: {size}</code>"
+        f_caption = f_caption + f"\n\n<code>✰ @TvSeriesLand4U ✰\n\n🚀 Size: {size}</code>"
         await query.answer()
         await client.send_cached_media(
             chat_id=query.from_user.id,
@@ -524,15 +524,15 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 [
                     [
                         InlineKeyboardButton(
-                            '🎭 Wᴇʙ Sᴇʀɪᴇs', url="https://t.me/UFSWebSeries"
+                            '📺 Wᴇʙ Sᴇʀɪᴇs', url="https://t.me/TvSeriesLand4U"
                         ),
                         InlineKeyboardButton(
-                            '🎭 ᴍᴏᴠɪᴇs', url="https://t.me/UniversalFilmStudio"
+                            '🎬 ᴍᴏᴠɪᴇs', url="https://t.me/onlymovie76"
                         )
                     ],
                     [
                         InlineKeyboardButton(
-                            '⭕️ ᴘᴍ ᴍᴇ ⭕️', url="https://t.me/UFSChatBot"
+                            '🗞️ Updates', url="https://t.me/M76Links"
                         )
                     ]
                 ]
@@ -544,7 +544,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         buttons = [
             [
                 InlineKeyboardButton('🔍 Search', switch_inline_query_current_chat=''),
-                InlineKeyboardButton('🤖 Updates', url='https://t.me/TeamEvamaria')
+                InlineKeyboardButton('🚀 Updates', url='https://t.me/TvSeriesLand4U_Updates')
             ],
             [
                 InlineKeyboardButton('ℹ Help', callback_data='help'),
@@ -588,7 +588,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "about":
         buttons = [
             [
-                InlineKeyboardButton('🤖 Updates', url='https://t.me/TeamEvamaria'),
+                InlineKeyboardButton('🗞️ Updates', url='https://t.me/M76Links'),
                 InlineKeyboardButton('♥️ Source', callback_data='source')
             ],
             [
@@ -1017,10 +1017,10 @@ async def auto_filter(client, msg, spoll=False):
                 else:
                     Send_message = await client.send_video(
                         chat_id=msg.chat.id,
-                        video="https://telegra.ph/file/3e9f7db0c98e6b236c2c7.mp4",
+                        video="https://telegra.ph/file/1fbdc1703b58c5c0ed242.mp4",
                         caption=f"Couldn't Find This Movie.Please Try Again Or Search On Our "
-                                f"<b><a href='https://t.me/UFSNewRelease'>Channel</a></b>. \n\n"
-                                f"ഈ സിനിമയുടെ ഒറിജിനൽ പേര് ഗൂഗിളിൽ പോയി കണ്ടെത്തി അതുപോലെ ഇവിടെ കൊടുക്കുക 🥺",
+                                f"<b><a href='https://t.me/onlymovie76'>Group</a></b>. \n\n"
+                                f"ഈ സീരീസ്ന്റ് ഒറിജിനൽ പേര് പോയി കണ്ടെത്തി അതുപോലെ ഇവിടെ കൊടുക്കുക 🥺",
                         parse_mode="html",
                         reply_to_message_id=msg.message_id
                     )
@@ -1101,11 +1101,11 @@ async def auto_filter(client, msg, spoll=False):
         )
 
     btn.insert(0, [
-        InlineKeyboardButton("⭕️ Wᴇʙ Sᴇʀɪᴇs ⭕️", url="https://t.me/UFSWebSeries")
+        InlineKeyboardButton("📺 Wᴇʙ Sᴇʀɪᴇs", url="https://t.me/TvSeriesLand4U")
     ])
     btn.insert(0, [
-        InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
-        InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewRelease")
+        InlineKeyboardButton("🗞️ Updates", url="https://t.me/M76Links"),
+        InlineKeyboardButton("🎬 ɴᴇᴡ ᴍᴏᴠɪᴇs", url="https://t.me/onlymovie76")
     ])
     imdb = await get_poster(search, file=(files[0]).file_name) if IMDB else None
     query_by = f"<b>ɴᴏ ᴏғ ғɪʟᴇs :</b> <code><b><i>{total_results}</i></b></code>\n" \
@@ -1213,10 +1213,10 @@ async def advantage_spell_chok(client, msg):
     if not g_s:
         Send_message = await client.send_video(
             chat_id=msg.chat.id,
-            video="https://telegra.ph/file/3e9f7db0c98e6b236c2c7.mp4",
-            caption=f"Couldn't Find This Movie.Please Try Again Or Search On Our "
-                    f"<b><a href='https://t.me/UFSNewRelease'>Channel</a></b>. \n\n"
-                    f"ഈ സിനിമയുടെ ഒറിജിനൽ പേര് ഗൂഗിളിൽ പോയി കണ്ടെത്തി അതുപോലെ ഇവിടെ കൊടുക്കുക 🥺",
+            video="https://telegra.ph/file/1fbdc1703b58c5c0ed242.mp4",
+            caption=f"Couldn't Find This Series.Please Try Again Or Search On Our "
+                    f"<b><a href='https://t.me/M76Links'>Channel</a></b>. \n\n"
+                    f"ഈ സീരീസ്ന്റ് ഒറിജിനൽ പേര് ഗൂഗിളിൽ പോയി കണ്ടെത്തി അതുപോലെ ഇവിടെ കൊടുക്കുക 🥺",
             parse_mode="html",
             reply_to_message_id=msg.message_id
         )
@@ -1254,10 +1254,10 @@ async def advantage_spell_chok(client, msg):
     if not movielist:
         Send_message = await client.send_video(
             chat_id=msg.chat.id,
-            video="https://telegra.ph/file/3e9f7db0c98e6b236c2c7.mp4",
-            caption=f"Couldn't Find This Movie.Please Try Again Or Search On Our "
-                    f"<b><a href='https://t.me/UFSNewRelease'>Channel</a></b>. \n\n"
-                    f"ഈ സിനിമയുടെ ഒറിജിനൽ പേര് ഗൂഗിളിൽ പോയി കണ്ടെത്തി അതുപോലെ ഇവിടെ കൊടുക്കുക 🥺",
+            video="https://telegra.ph/file/1fbdc1703b58c5c0ed242.mp4",
+            caption=f"Couldn't Find This Series.Please Try Again Or Search On Our "
+                    f"<b><a href='https://t.me/TvSeriesLand4U_Updates'>Channel</a></b>. \n\n"
+                    f"ഈ സീരീസ്ന്റ് ഒറിജിനൽ പേര് ഗൂഗിളിൽ പോയി കണ്ടെത്തി അതുപോലെ ഇവിടെ കൊടുക്കുക 🥺",
             parse_mode="html",
             reply_to_message_id=msg.message_id
         )
@@ -1293,12 +1293,12 @@ async def advantage_spell_chok(client, msg):
     btn = build_keyboard(btn)
 
     btn.insert(0, [
-        InlineKeyboardButton("⭕️ Wᴇʙ Sᴇʀɪᴇs ⭕️", url="https://t.me/UFSWebSeries")
+        InlineKeyboardButton("📺 Wᴇʙ Sᴇʀɪᴇs", url="https://t.me/TvSeriesLand4U")
     ])
 
     btn.insert(0, [
-        InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
-        InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewRelease")
+        InlineKeyboardButton("🗞️ Updates", url="https://t.me/M76Links"),
+        InlineKeyboardButton("🎬 ɴᴇᴡ ᴍᴏᴠɪᴇs", url="https://t.me/onlymovie76")
     ])
 
     # btn = [[
@@ -1309,8 +1309,8 @@ async def advantage_spell_chok(client, msg):
     #            ] for k, movie in enumerate(movielist)]
     # btn.append([InlineKeyboardButton(text="Close", callback_data=f'spolling#{user}#close_spellcheck')])
     # btn.insert(0, [
-    #     InlineKeyboardButton("⭕️ ᴘᴍ ᴍᴇ ⭕️", url="https://t.me/UFSChatBot"),
-    #     InlineKeyboardButton("⚜ ɴᴇᴡ ᴍᴏᴠɪᴇs ⚜", url="https://t.me/UFSNewRelease")
+    #     InlineKeyboardButton("🗞️ Updates", url="https://t.me/M76Links"),
+    #     InlineKeyboardButton("🎬 ɴᴇᴡ ᴍᴏᴠɪᴇs", url="https://t.me/onlymovie76")
     # ])
     await msg.reply("I Couldn't Find Anything Related To That\nDid You Mean Any One Of These 👇🏻?",
                     reply_markup=InlineKeyboardMarkup(btn))
