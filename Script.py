@@ -1,15 +1,15 @@
 class script(object):
     START_TXT = """𝙷𝙴𝙻𝙾 {},
-𝙼𝚈 𝙽𝙰𝙼𝙴 𝙸𝚂 <a href=https://t.me/{}>{}</a>, 𝙸 𝙲𝙰𝙽 𝙿𝚁𝙾𝚅𝙸𝙳𝙴 𝙼𝙾𝚅𝙸𝙴𝚂😍"""
+𝙼𝚈 𝙽𝙰𝙼𝙴 𝙸𝚂 <a href=https://t.me/{}>{}</a>, 𝙸 𝙲𝙰𝙽 𝙿𝚁𝙾𝚅𝙸𝙳𝙴 sᴇʀɪᴇs"""
     HELP_STRINGS = """
-Hey Dear <b>{}</b>! My name is <b>UFS #V3.0</b>. I Am A Group Movie Bot, Here To Help You Get Around And Keep The Order In Your Groups!
+Hey Dear <b>{}</b>! My name is <b>𝐌𝐢𝐥𝐥𝐢𝐞</b>. I Am A Group 𝐒𝐞𝐫𝐢𝐞𝐬 Bot!
 I Have Lots Of Handy Features, 
 
 <b>Helpful commands</b>:
 - /start: Starts me! You've probably already used this.
 - /help: Sends this message; I'll tell you more about myself!
-- /donate: Gives you info on how to support me and my creator.
-{}
+- You Can See How To Control Me In Here
+
 
 All commands can be used with the following: /
 """
@@ -24,7 +24,7 @@ All commands can be used with the following: /
 ✯ 𝙱𝚄𝙸𝙻𝙳 𝚂𝚃𝙰𝚃𝚄𝚂: v1.0.1 [ 𝙱𝙴𝚃𝙰 ]"""
     SOURCE_TXT = """<b>NOTE:</b>
 - Eva Maria is a open source project. 
-- Source - https://github.com/EvamariaTG/EvaMaria  
+- Our Malayalam subtitle bot - https://t.me/TvSeriesLand4U_Subtitle_Bot
 
 <b>DEVS:</b>
 - <a href=https://t.me/TeamEvamaria>Team Eva Maria</a>"""
@@ -33,7 +33,7 @@ All commands can be used with the following: /
 - Filter is the feature were users can set automated replies for a particular keyword and UFS #V3.0 will respond whenever a keyword is found the message
 
 <b>NOTE:</b>
-1. UFS #V3.0 should have admin privilege.
+1. 𝐌𝐢𝐥𝐥𝐢𝐞 should have admin privilege.
 2. only admins can add filters in a chat.
 3. alert buttons have a limit of 64 characters.
 
@@ -44,15 +44,15 @@ All commands can be used with the following: /
 • /delall - <code>delete the whole filters in a chat (chat owner only)</code>"""
     BUTTON_TXT = """Help: <b>Buttons</b>
 
-- UFS #V3.0 Supports both url and alert inline buttons.
+- 𝐌𝐢𝐥𝐥𝐢𝐞 Supports both url and alert inline buttons.
 
 <b>NOTE:</b>
 1. Telegram will not allows you to send buttons without any content, so content is mandatory.
-2. UFS #V3.0 supports buttons with any telegram media type.
+2. Millie supports buttons with any telegram media type.
 3. Buttons should be properly parsed as markdown format
 
 <b>URL buttons:</b>
-<code>[Button Text](buttonurl:https://t.me/UFSChatBot)</code>
+<code>[Button Text](buttonurl:https://t.me/TvSeriesLand4U)</code>
 
 <b>Alert buttons:</b>
 <code>[Button Text](buttonalert:This is an alert message)</code>"""
