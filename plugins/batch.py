@@ -68,14 +68,14 @@ async def gen_link_s(client: Client, message):
         try:
             channel = await client.get_chat(channel_id)
         except Exception as e:
-            await channel_message.reply("❌ Error\n\nMake Sure Bot Is Admin In Forwarded Channel...", quote=True)
+            await channel_message.reply("✗ Error\n\nMake Sure Bot Is Admin In Forwarded Channel...", quote=True)
             return
 
         msg_id = await get_message_id(client, channel_message, channel_id)
         if msg_id:
             break
         else:
-            await channel_message.reply("❌ Error\n\nthis Forwarded Post is not from my DB Channel or this Link is not "
+            await channel_message.reply("✗ Error\n\nthis Forwarded Post is not from my DB Channel or this Link is not "
                                         "taken from DB Channel", quote=True)
             continue
 
@@ -161,14 +161,14 @@ async def gen_link_batch(bot, message):
         try:
             channel = await bot.get_chat(first_channel_id)
         except Exception as e:
-            await first_message.reply("❌ Error\n\nMake Sure Bot Is Admin In Forwarded Channel...", quote=True)
+            await first_message.reply("✗ Error\n\nMake Sure Bot Is Admin In Forwarded Channel...", quote=True)
             return
 
         f_msg_id = await get_message_id(bot, first_message, first_channel_id)
         if f_msg_id:
             break
         else:
-            await first_message.reply("❌ Error\n\nthis Forwarded Post is not from my DB Channel or this Link is taken "
+            await first_message.reply("✗ Error\n\nthis Forwarded Post is not from my DB Channel or this Link is taken "
                                       "from DB Channel", quote=True)
             continue
 
@@ -184,7 +184,7 @@ async def gen_link_batch(bot, message):
         try:
             channel = await bot.get_chat(second_channel_id)
         except Exception as e:
-            await second_message.reply("❌ Error\n\nMake Sure Bot Is Admin In Forwarded Channel...", quote=True)
+            await second_message.reply("✗ Error\n\nMake Sure Bot Is Admin In Forwarded Channel...", quote=True)
             return
 
         if first_channel_id == second_channel_id:
@@ -192,11 +192,11 @@ async def gen_link_batch(bot, message):
             if l_msg_id:
                 break
             else:
-                await second_message.reply("❌ Error\n\nThis Forwarded Post Is Not From My DB Channel Or This "
+                await second_message.reply("✗ Error\n\nThis Forwarded Post Is Not From My DB Channel Or This "
                                            "Link Is Not Taken From DB Channel", quote=True)
                 continue
         else:
-            await second_message.reply("❌ Error\n\nthis Forwarded Post Is Not From My First Forwarded Channel Or This "
+            await second_message.reply("✗ Error\n\nthis Forwarded Post Is Not From My First Forwarded Channel Or This "
                                        "Link Is Taken From DB Channel", quote=True)
 
     try:
@@ -390,14 +390,14 @@ async def gen_link_batch(bot, message):
 #         try:
 #             channel = await client.get_chat(first_channel_id)
 #         except Exception as e:
-#             await first_message.reply("❌ Error\n\nMake Sure Bot Is Admin In Forwarded Channel...", quote=True)
+#             await first_message.reply("✗ Error\n\nMake Sure Bot Is Admin In Forwarded Channel...", quote=True)
 #             return
 #
 #         f_msg_id = await get_message_id(client, first_message, first_channel_id)
 #         if f_msg_id:
 #             break
 #         else:
-#             await first_message.reply("❌ Error\n\nthis Forwarded Post is not from my DB Channel or this Link is taken "
+#             await first_message.reply("✗ Error\n\nthis Forwarded Post is not from my DB Channel or this Link is taken "
 #                                       "from DB Channel", quote=True)
 #             continue
 #
@@ -413,7 +413,7 @@ async def gen_link_batch(bot, message):
 #         try:
 #             channel = await client.get_chat(second_channel_id)
 #         except Exception as e:
-#             await second_message.reply("❌ Error\n\nMake Sure Bot Is Admin In Forwarded Channel...", quote=True)
+#             await second_message.reply("✗ Error\n\nMake Sure Bot Is Admin In Forwarded Channel...", quote=True)
 #             return
 #
 #         if first_channel_id == second_channel_id:
@@ -421,11 +421,11 @@ async def gen_link_batch(bot, message):
 #             if s_msg_id:
 #                 break
 #             else:
-#                 await second_message.reply("❌ Error\n\nThis Forwarded Post Is Not From My DB Channel Or This "
+#                 await second_message.reply("✗ Error\n\nThis Forwarded Post Is Not From My DB Channel Or This "
 #                                            "Link Is Not Taken From DB Channel", quote=True)
 #                 continue
 #         else:
-#             await second_message.reply("❌ Error\n\nthis Forwarded Post Is Not From My First Forwarded Channel Or This "
+#             await second_message.reply("✗ Error\n\nthis Forwarded Post Is Not From My First Forwarded Channel Or This "
 #                                        "Link Is Taken From DB Channel", quote=True)
 #
 #     string = f"get-{f_msg_id}-{s_msg_id}-{abs(second_channel_id)}"
@@ -543,14 +543,14 @@ async def gen_link_batch(bot, message):
 #         try:
 #             channel = await client.get_chat(channel_id)
 #         except Exception as e:
-#             await channel_message.reply("❌ Error\n\nMake Sure Bot Is Admin In Forwarded Channel...", quote=True)
+#             await channel_message.reply("✗ Error\n\nMake Sure Bot Is Admin In Forwarded Channel...", quote=True)
 #             return
 #
 #         msg_id = await get_message_id(client, channel_message, channel_id)
 #         if msg_id:
 #             break
 #         else:
-#             await channel_message.reply("❌ Error\n\nthis Forwarded Post is not from my DB Channel or this Link is not "
+#             await channel_message.reply("✗ Error\n\nthis Forwarded Post is not from my DB Channel or this Link is not "
 #                                         "taken from DB Channel", quote=True)
 #             continue
 #
