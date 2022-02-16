@@ -479,7 +479,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                             ],
                             [
                                 InlineKeyboardButton(
-                                    '🚀 Updates', url="https://t.me/M76Links"
+                                    '📀 Updates', url="https://t.me/M76Links"
                                 )
                             ]
                         ]
@@ -532,7 +532,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     ],
                     [
                         InlineKeyboardButton(
-                            '🚀 Updates', url="https://t.me/M76Links"
+                            '📀 Updates', url="https://t.me/M76Links"
                         )
                     ]
                 ]
@@ -544,7 +544,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         buttons = [
             [
                 InlineKeyboardButton('🔍 Search', switch_inline_query_current_chat=''),
-                InlineKeyboardButton('🚀 Updates', url='https://t.me/TvSeriesLand4U_Updates')
+                InlineKeyboardButton('📀 Updates', url='https://t.me/TvSeriesLand4U_Updates')
             ],
             [
                 InlineKeyboardButton('ℹ Help', callback_data='help'),
@@ -588,7 +588,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
     elif query.data == "about":
         buttons = [
             [
-                InlineKeyboardButton('🚀 Updates', url='https://t.me/M76Links'),
+                InlineKeyboardButton('📀 Updates', url='https://t.me/M76Links'),
                 InlineKeyboardButton('♥️ Source', callback_data='source')
             ],
             [
@@ -1104,7 +1104,7 @@ async def auto_filter(client, msg, spoll=False):
         InlineKeyboardButton("📺 Wᴇʙ Sᴇʀɪᴇs", url="https://t.me/TvSeriesLand4U")
     ])
     btn.insert(0, [
-        InlineKeyboardButton("📝 Updates", url="https://t.me/M76Links"),
+        InlineKeyboardButton("📀 Updates", url="https://t.me/M76Links"),
         InlineKeyboardButton("🎬 ɴᴇᴡ ᴍᴏᴠɪᴇs", url="https://t.me/onlymovie76")
     ])
     imdb = await get_poster(search, file=(files[0]).file_name) if IMDB else None
@@ -1297,7 +1297,7 @@ async def advantage_spell_chok(client, msg):
     ])
 
     btn.insert(0, [
-        InlineKeyboardButton("📝 Updates", url="https://t.me/M76Links"),
+        InlineKeyboardButton("📀 Updates", url="https://t.me/M76Links"),
         InlineKeyboardButton("🎬 ɴᴇᴡ ᴍᴏᴠɪᴇs", url="https://t.me/onlymovie76")
     ])
 
@@ -1309,7 +1309,7 @@ async def advantage_spell_chok(client, msg):
     #            ] for k, movie in enumerate(movielist)]
     # btn.append([InlineKeyboardButton(text="Close", callback_data=f'spolling#{user}#close_spellcheck')])
     # btn.insert(0, [
-    #     InlineKeyboardButton("📝 Updates", url="https://t.me/M76Links"),
+    #     InlineKeyboardButton("📀 Updates", url="https://t.me/M76Links"),
     #     InlineKeyboardButton("🎬 ɴᴇᴡ ᴍᴏᴠɪᴇs", url="https://t.me/onlymovie76")
     # ])
     await msg.reply("I Couldn't Find Anything Related To That\nDid You Mean Any One Of These 👇🏻?",
