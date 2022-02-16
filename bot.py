@@ -36,6 +36,7 @@ class Bot(Client):
         temp.BANNED_CHATS = b_chats
         await super().start()
         await Media.ensure_indexes()
+        self.set_parse_mode()
         me = await self.get_me()
         temp.ME = me.id
         temp.U_NAME = me.username
