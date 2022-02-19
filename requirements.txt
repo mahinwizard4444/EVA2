@@ -16,4 +16,4 @@ gTTS
 aiohttp
 pyperclip
 python-decouple
-© 2022 G
+
